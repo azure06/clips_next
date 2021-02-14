@@ -30,9 +30,9 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'row',
     background:
       'linear-gradient(180deg, rgba(246,249,252,1) 0%, rgba(246,249,252,0) 25%)',
-    marginTop: '64px',
+    marginTop: '112px', // 64 + 48
     [theme.breakpoints.down('md')]: {
-      marginTop: '54px',
+      marginTop: '102px', // 54 + 48
       justifyContent: 'center',
     },
     backgroundRepeat: 'no-repeat',
@@ -220,7 +220,7 @@ export default function Home(): JSX.Element {
         </div>
 
         {/* Content2 */}
-        <div>
+        <div style={{ padding: '0 16px' }}>
           <div
             style={{
               display: 'flex',
@@ -315,7 +315,7 @@ export default function Home(): JSX.Element {
         </div>
 
         {/* Content3 */}
-        <div className={styles.main} style={{ width: '100%' }}>
+        <div className={styles.main} style={{ padding: '48px 16px' }}>
           <div>
             <Typography
               variant="h2"

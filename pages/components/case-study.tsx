@@ -34,30 +34,20 @@ export function CaseStudy(props: unknown): JSX.Element {
         title="Flavia Agapetos"
         subheader="CASE STUDY"
       />
-      <Typography
-        variant="body1"
-        style={{ padding: '8px 16px', fontWeight: 200 }}
-      >
-        Flavia Agapetos used to spend hours chasing documents with the list of
-        addresses she was looking for.
-      </Typography>
       <CardContent style={{ padding: '8px 16px' }}>
-        {
-          <React.Fragment>
-            <Skeleton
-              animation="wave"
-              height={10}
-              style={{ marginBottom: 6 }}
-            />
-            <Skeleton animation="wave" height={10} width="80%" />
-          </React.Fragment>
-        }
+        <Typography
+          variant="body1"
+          style={{ padding: '16px', fontWeight: 500 }}
+        >
+          Flavia Agapetos used to spend hours chasing documents with the list of
+          addresses she was looking for.
+        </Typography>
         <Typography variant="h6" style={{ padding: '16px', fontWeight: 700 }}>
           SOLUTION
         </Typography>
         <Typography
           variant="body1"
-          style={{ padding: '8px 16px', fontWeight: 200 }}
+          style={{ padding: '8px 16px', fontWeight: 500 }}
         >
           Flavia installed Clips to save the clipboard history. Now she collects
           the list of addresses instantly.
@@ -67,7 +57,7 @@ export function CaseStudy(props: unknown): JSX.Element {
         </Typography>
         <Typography
           variant="body1"
-          style={{ padding: '8px 16px', fontWeight: 200 }}
+          style={{ padding: '8px 16px', fontWeight: 500 }}
         >
           By using Clips Flavia was able to finish her work 8 times faster than
           usual.
@@ -81,6 +71,7 @@ export function CaseStudy(props: unknown): JSX.Element {
           variant="contained"
           disableElevation
           href="/download"
+          style={{ boxShadow: '0 3px 8px 1px rgba(0,91,255, .3)' }}
         >
           <Typography
             variant="body2"

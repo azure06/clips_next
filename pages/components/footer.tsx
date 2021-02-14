@@ -50,6 +50,9 @@ export function Footer(props: unknown): JSX.Element {
               <Typography style={{ fontWeight: 900, padding: '5px 0' }}>
                 Blog
               </Typography>
+              <Link className={classes.gridItems} href="/blog/introduction">
+                Introduction to Clips
+              </Link>
             </div>
           </div>
           <div className={classes.gridList}>
@@ -85,11 +88,11 @@ export function Footer(props: unknown): JSX.Element {
               <Typography style={{ fontWeight: 900, padding: '5px 0' }}>
                 Resources
               </Typography>
-              <Link className={classes.gridItems} href="/privacy-policy">
+              <Link className={classes.gridItems} href="/privacy">
                 Privacy Policy
               </Link>
               <Link className={classes.gridItems} href="/contact">
-                Contact Us
+                Contact
               </Link>
               <Link className={classes.gridItems} href="/about">
                 About

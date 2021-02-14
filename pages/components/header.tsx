@@ -14,13 +14,37 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
+type DefaultColors =
+  | 'inherit'
+  | 'transparent'
+  | 'default'
+  | 'primary'
+  | 'secondary';
+
 interface Props {
   /**
    * Injected by the documentation to work in an iframe.
    * You won't need it on your project.
    */
   children?: React.ReactElement;
-  headerColor?: 'inherit' | 'transparent' | 'default' | 'primary' | 'secondary';
+  headerColor?: DefaultColors | string;
+}
+
+function isDefaultColor(arg?: string): arg is DefaultColors {
+  switch (arg) {
+    case 'inherit':
+      return true;
+    case 'transparent':
+      return true;
+    case 'default':
+      return true;
+    case 'primary':
+      return true;
+    case 'secondary':
+      return true;
+    default:
+      return false;
+  }
 }
 
 const useStyles = makeStyles(theme => ({
@@ -66,7 +90,16 @@ export function Header(props: Props): JSX.Element {
   return (
     <React.Fragment>
       <ElevationScroll {...props}>
-        <AppBar color={props.headerColor ?? 'default'}>
+        <AppBar
+          color={
+            isDefaultColor(props.headerColor) ? props.headerColor : 'default'
+          }
+          style={
+            isDefaultColor(props.headerColor)
+              ? {}
+              : { backgroundColor: props.headerColor }
+          }
+        >
           <Toolbar>
             <ButtonBase style={{ color: theme.palette.common.white }} href="/">
               <div className={classes.logo}>
@@ -135,6 +168,7 @@ export function Header(props: Props): JSX.Element {
           alignItems: 'center',
           backgroundColor: theme.palette.secondary.main,
           color: fade(theme.palette.common.white, 0.75),
+          zIndex: 2,
         }}
       >
         <span

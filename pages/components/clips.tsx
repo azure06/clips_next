@@ -15,7 +15,6 @@ import {
   useTheme,
 } from '@material-ui/core';
 import {
-  Menu,
   Laptop,
   FolderShared,
   AccountCircle,

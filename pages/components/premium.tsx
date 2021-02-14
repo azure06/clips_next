@@ -47,10 +47,15 @@ function Media(props: unknown) {
           variant="contained"
           disableElevation
           href="/premium"
+          style={{ boxShadow: '0 3px 8px 1px rgba(0,91,255, .3)' }}
         >
           <Typography
             variant="body2"
-            style={{ fontWeight: 700, fontSize: '0.7rem', padding: '5px 10px' }}
+            style={{
+              fontWeight: 700,
+              fontSize: '0.7rem',
+              padding: '5px 10px',
+            }}
           >
             Get Premium
           </Typography>

@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexGrow: 1,
     flexWrap: 'wrap',
-    padding: '100px',
+    padding: '100px 0',
+    justifyContent: 'center',
   },
   container: {
     display: 'flex',
@@ -81,7 +82,8 @@ export default function Home(): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className={styles.main} style={{ zIndex: 1, marginTop: 48 }}>
+      {/* 48 + black lives matter */}
+      <main className={styles.mainWithMargin}>
         <div className={classes.pattern} />
         <div
           style={{
@@ -91,7 +93,7 @@ export default function Home(): JSX.Element {
             padding: '0 24px',
           }}
         >
-          <Typography variant="h3">
+          <Typography variant="h3" style={{ fontWeight: 700 }}>
             Get started with Community Edition.
           </Typography>
           <Typography
