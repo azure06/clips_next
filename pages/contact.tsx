@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React, { useState } from 'react';
-import { Header } from './components/header';
-import { Footer } from './components/footer';
+import Header from './components/header';
+import Footer from './components/footer';
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -249,8 +249,8 @@ export default function Contact(): JSX.Element {
                       style={{ padding: '16px 4px', fontWeight: 500 }}
                     >
                       You can also email us directly at{' '}
-                      <a href="mailto: info@infiniticlips.com">
-                        info@infiniticlips.com
+                      <a href="mailto: infiniticlips@proton.me">
+                        infiniticlips@proton.me
                       </a>
                     </Typography>
                     <Divider />

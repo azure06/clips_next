@@ -96,7 +96,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function Pattern(): JSX.Element {
+export default function Pattern(): JSX.Element {
   const classes = useStyles();
   return (
     <div className={classes.main}>

@@ -15,16 +15,29 @@ import {
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
-import { Header } from './components/header';
 import { Done } from '@material-ui/icons';
-import { Footer } from './components/footer';
+import Header from './components/header';
+import Footer from './components/footer';
+import { useRouter } from 'next/router';
+import { loadStripe } from '@stripe/stripe-js';
+
+const NEXT_PUBLIC_STRIPE_PUBLIC_KEY =
+  process.env.NODE_ENV === 'development'
+    ? process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY_TEST
+    : process.env.NEXT_PUBLIC_STRIPE_PUBLIC_KEY;
+const NEXT_PUBLIC_CHECKOUT_SESSION_URL =
+  process.env.NODE_ENV === 'development'
+    ? process.env.NEXT_PUBLIC_CHECKOUT_SESSION_URL_TEST
+    : process.env.NEXT_PUBLIC_CHECKOUT_SESSION_URL;
+
+console.log(NEXT_PUBLIC_CHECKOUT_SESSION_URL);
 
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
     flexGrow: 1,
     flexWrap: 'wrap',
-    padding: '100px 0',
+    padding: '50px 0',
     justifyContent: 'center',
   },
   container: {
@@ -48,8 +61,12 @@ const useStyles = makeStyles(theme => ({
   card: {
     minWidth: 320,
     margin: '10px',
-    transition: 'transform .2s',
-    '&:hover': { transform: 'scale(1.1)' },
+    transition: 'transform .2s, box-shadow 0.2s ease;',
+    '&:hover': {
+      transform: 'scale(1.1)',
+      boxShadow:
+        '0px 11px 15px -7px rgb(0 0 0 / 5%), 0px 24px 38px 3px rgb(0 0 0 / 3.5%), 0px 9px 46px 8px rgb(0 0 0 / 3%)',
+    },
   },
   pos: {
     marginBottom: 12,
@@ -59,6 +76,7 @@ const useStyles = makeStyles(theme => ({
 export default function Home(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
+  const router = useRouter();
   const free = [
     { value: 'Search', divider: false },
     { value: '', divider: true },
@@ -71,7 +89,7 @@ export default function Home(): JSX.Element {
     { value: 'Labels', divider: true },
     { value: 'Google Drive Backup', divider: true },
     { value: 'Save RTF and HTML Text', divider: false },
-    { value: 'Google Drive Auto Sync', divider: false },
+    { value: 'Google Drive Auto-sync', divider: false },
     { value: 'Automatic History Cleanup', divider: false },
   ];
 
@@ -94,7 +112,7 @@ export default function Home(): JSX.Element {
           }}
         >
           <Typography variant="h3" style={{ fontWeight: 700 }}>
-            Get started with Community Edition.
+            Get started with the Community Edition.
           </Typography>
           <Typography
             variant="h4"
@@ -102,13 +120,38 @@ export default function Home(): JSX.Element {
           >
             Everything you need all in one place.
           </Typography>
+          <Typography
+            style={{
+              marginTop: 50,
+              fontWeight: 900,
+              color: theme.palette.text.secondary,
+              letterSpacing: 2.5,
+            }}
+          >
+            NO REGISTRATION NEEDED
+          </Typography>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              marginTop: 5,
+              color: theme.palette.text.secondary,
+            }}
+          >
+            <div style={{ fontSize: '0.8rem', fontWeight: 400 }}>Powerd by</div>
+            <img
+              src="/stripe.svg"
+              style={{ width: 50, filter: ' grayscale(90%)' }}
+            />
+          </div>
         </div>
 
         {/* Plans */}
         <div className={classes.root}>
           <Card
             className={classes.card}
-            elevation={24}
+            elevation={4}
             style={{
               backgroundColor: theme.palette.common.white,
             }}
@@ -184,7 +227,11 @@ export default function Home(): JSX.Element {
                   padding: '10px 25px',
                 }}
                 disableElevation
-                href="/download"
+                onClick={e => {
+                  router.push({
+                    pathname: '/download',
+                  });
+                }}
               >
                 DOWNLOAD
               </Button>
@@ -193,7 +240,7 @@ export default function Home(): JSX.Element {
           <Card
             className={classes.card}
             style={{ backgroundColor: '#2D2D54' }}
-            elevation={0}
+            elevation={4}
           >
             <div style={{ padding: 16 }}>
               <Typography
@@ -277,8 +324,38 @@ export default function Home(): JSX.Element {
                   padding: '10px 25px',
                   color: fade(theme.palette.common.white, 0.85),
                 }}
-                disabled
                 disableElevation
+                onClick={() => {
+                  fetch(NEXT_PUBLIC_CHECKOUT_SESSION_URL, {
+                    method: 'GET',
+                    mode: 'cors',
+                    headers: {
+                      'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                  })
+                    .then(function (response) {
+                      return response.json();
+                    })
+                    .then(async function (session) {
+                      const stripe = await loadStripe(
+                        NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+                      );
+                      return stripe.redirectToCheckout({
+                        sessionId: session.id,
+                      });
+                    })
+                    .then(function (result) {
+                      // If redirectToCheckout fails due to a browser or network
+                      // error, you should display the localized error message to your
+                      // customer using error.message.
+                      if (result.error) {
+                        alert(result.error.message);
+                      }
+                    })
+                    .catch(function (error) {
+                      console.error('Error:', error);
+                    });
+                }}
               >
                 PURCHASE
               </Button>

@@ -1,0 +1,27 @@
+<XML_PAD>
+    <script/>
+    <Company_Name>Infiniti</Company_Name>
+    <Company_WebSite_URL>https://infiniticlips.com</Company_WebSite_URL>
+    <Author_Email>gabri06e@gmail.com</Author_Email>
+    <Program_Name>Clips</Program_Name>
+    <Program_Version>0.1.18</Program_Version>
+    <Program_Release_Year>2020</Program_Release_Year>
+    <Program_Release_Month>06</Program_Release_Month>
+    <Program_Release_Day>01</Program_Release_Day>
+    <Program_Cost_Dollars>0</Program_Cost_Dollars>
+    <Program_OS_Support>Windows 7 x64, Windows 10 x64, macOS</Program_OS_Support>
+    <Program_Language>English, Italian, 日本語,  简体中文, 繁體中文</Program_Language>
+    <Program_Change_Info>Security updates and new features</Program_Change_Info>
+    <File_Size_Bytes>123456789</File_Size_Bytes>
+    <Keywords>Clipboard, Clipboard History, Clipboard Manager, Clipboard Windows 10, Clipboard macOS</Keywords>
+    <Char_Desc_250>Clips is a universal clipboard app that automatically saves everything you copy. You can access your history anytime, anywhere.</Char_Desc_250>
+    <Char_Desc_2000> Clips Clipboard is an extremely handy software that keeps your clipped data always ready-to-use. 
+    Clips comes with a visually appealing interface and supports a wide range of data including text, HTML, pictures, and even RTF files.
+    There are many useful options: Google Drive synchronization, automatic cleanup, hotkey assignment,  image editor and many more.
+    Clips is compatible with Windows and macOS.
+    </Char_Desc_2000>
+    <Program_Category_Class>Desktop|Development|System Utilities</Program_Category_Class>
+    <Application_Screenshot_URL>https://infiniticlips.com/app.png</Application_Screenshot_URL>
+    <Primary_Download_URL>https://infiniticlips.com/download</Primary_Download_URL>
+    <Application_XML_File_URL>https://infiniticlips.com/pad.xml</Application_XML_File_URL>
+</XML_PAD>

@@ -14,6 +14,23 @@ export default class MyDocument extends Document {
             name="theme-color"
             content={'main' in primary ? primary.main : undefined}
           />
+          <meta
+            name="description"
+            content="Clips is a flexible clipboard manager for Mac and Windows. It stores everything you copy and keeps your clipboard history organized."
+          ></meta>
+          <meta property="og:title" content="Clips - Clipboard Manager"></meta>
+          <meta
+            property="og:description"
+            content="Clips is a flexible clipboard manager for Mac and Windows. It stores everything you copy and keeps your clipboard history organized."
+          ></meta>
+          <meta property="og:type" content="website"></meta>
+          <meta property="og:url" content="https://infiniticlips.com"></meta>
+          <meta name="twitter:card" content="summary_large_image"></meta>
+
+          {/* <meta
+            property="og:image"
+            content="https://infiniticlips.com/app.png"
+          ></meta> */}
           {/* <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Lato:100,300,400,500,700,900&display=swap"

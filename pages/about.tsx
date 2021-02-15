@@ -3,9 +3,8 @@ import styles from '../styles/Home.module.css';
 import { Divider, makeStyles, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
-import { Header } from './components/header';
-import { Footer } from './components/footer';
-import clsx from 'clsx';
+import Header from './components/header';
+import Footer from './components/footer';
 
 const useStyles = makeStyles(theme => ({
   pattern: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '850px',
     transform: 'skewY(-12deg)',
-    background: 'rgba(230,255, 215, 1)',
+    background: theme.palette.background.paper,
   },
   common: {
     fontWeight: 700,
@@ -33,9 +32,12 @@ export default function About(): JSX.Element {
         <title>Clips | Light. Multiple features. Runs everywhere.</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Header headerColor="rgba(230,255, 215, 1)" />
+      <Header />
       <div className={classes.pattern} />
-      <main className={styles.main} style={{ zIndex: 1, marginTop: 48 }}>
+      <main
+        className={styles.main}
+        style={{ zIndex: 1, marginTop: 48, minHeight: 800 }}
+      >
         <div
           style={{ display: 'flex', flexDirection: 'column', maxWidth: 700 }}
         >
@@ -92,10 +94,10 @@ export default function About(): JSX.Element {
               </a>
               . For more information please contact{' '}
               <a
-                href="mailto: info@infiniticlips.com"
+                href="mailto: infiniticlips@proton.me"
                 style={{ color: theme.palette.primary.main }}
               >
-                info@infiniticlips.com
+                infiniticlips@proton.me
               </a>
             </p>
           </div>

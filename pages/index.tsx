@@ -3,14 +3,13 @@ import styles from '../styles/Home.module.css';
 import { Button, fade, makeStyles, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
-import { Header } from './components/header';
-import { Pattern } from './components/pattern';
-import { Clips } from './components/clips';
-import { Footer } from './components/footer';
+import Header from './components/header';
+import Pattern from './components/pattern';
+import Clips from './components/clips';
+import Footer from './components/footer';
 import clsx from 'clsx';
-import { Premium } from './components/premium';
-import Image from 'next/image';
-import { CaseStudy } from './components/case-study';
+import Premium from './components/premium';
+import CaseStudy from './components/case-study';
 import {
   ViewAgenda,
   Search,
@@ -18,6 +17,7 @@ import {
   DeleteOutline,
   Star,
 } from '@material-ui/icons';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -94,6 +94,7 @@ const useStyles = makeStyles(theme => ({
 export default function Home(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
+  const router = useRouter();
   const transparent = fade(theme.palette.common.white, 0.3);
   const textShadow = `-1px 0 ${transparent}, 0 1px ${transparent}, 1px 0 ${transparent}, 0 -1px ${transparent}`;
 
@@ -114,7 +115,11 @@ export default function Home(): JSX.Element {
               alignItems: 'center',
             }}
           >
-            <Image src="/logo_text.svg" alt="Clips" width={140} height={50} />
+            <img
+              src="/logo_text.svg"
+              alt="Clips"
+              style={{ width: 140, height: 50 }}
+            />
             <Typography variant="h3" style={{ padding: '16px 0', textShadow }}>
               Clipboard.
             </Typography>
@@ -134,7 +139,11 @@ export default function Home(): JSX.Element {
                   'linear-gradient(45deg, rgba(0,91,255,1) 0%, rgba(95,179,210,1) 100%)', //'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
                 boxShadow: '0 3px 8px 1px rgba(0,91,255, .3)',
               }}
-              href="/download"
+              onClick={() =>
+                router.push({
+                  pathname: 'download',
+                })
+              }
               variant="contained"
             >
               DOWNLOAD
@@ -169,8 +178,7 @@ export default function Home(): JSX.Element {
             }}
           >
             Clips is a universal clipboard app that automatically saves
-            everything you copy. You can access your history at any moment from
-            everywhere.
+            everything you copy. You can access your history anytime, anywhere.
           </Typography>
 
           <div
@@ -204,7 +212,7 @@ export default function Home(): JSX.Element {
                 color: theme.palette.text.secondary,
               }}
             >
-              <p>Available for Windows and MacOS</p>
+              <p>Available for Windows, MacOS, and Linux</p>
             </Typography>
           </div>
         </div>
@@ -234,7 +242,7 @@ export default function Home(): JSX.Element {
               className={styles.description}
               style={{ marginTop: '148px', fontWeight: 700 }}
             >
-              Everything in your hands
+              Stop searching and start saving
             </Typography>
             <Typography
               variant="h5"
@@ -244,9 +252,10 @@ export default function Home(): JSX.Element {
                 textAlign: 'center',
               }}
             >
-              Bring a new perspective to Copy & Paste. You can find any item in
-              a second from your clipboard history. And by signing-in to Google
-              Drive you can keep in sync all your devices.
+              Your browser saves your history, so why shouldn’t your clipboard?
+              With Clips, you can find anything you want in seconds, simply by
+              grabbing it from your clipboard history. And by signing in to
+              Google Drive you can sync all your devices.
             </Typography>
           </div>
           {/* Icons */}
@@ -324,37 +333,61 @@ export default function Home(): JSX.Element {
             >
               Why Clips
             </Typography>
-            <Typography
-              variant="h5"
-              style={{
-                padding: '36px 0',
-                maxWidth: '860px',
-                textAlign: 'center',
-              }}
-            >
-              Are you curious? Check the sections below to know more details.
-            </Typography>
           </div>
 
           <div className={styles.grid}>
-            <a href="/features" className={styles.card}>
+            <a
+              onClick={e => {
+                e.preventDefault();
+                router.push({
+                  pathname: '/features',
+                });
+              }}
+              href="/features"
+              className={styles.card}
+            >
               <h3>Features &rarr;</h3>
-              <p>Find in-depth information about Clips features.</p>
+              <p>Find in-depth information about Clips.</p>
             </a>
 
-            <a href="/premium" className={styles.card}>
+            <a
+              onClick={e => {
+                e.preventDefault();
+                router.push({
+                  pathname: '/premium',
+                });
+              }}
+              href="/premium"
+              className={styles.card}
+            >
               <h3>Premium &rarr;</h3>
-              <p>Choose Community Edition or Premium Edition.</p>
+              <p>Choose the Community Edition or the Premium Edition.</p>
             </a>
 
-            <a href="/download" className={styles.card}>
+            <a
+              onClick={e => {
+                e.preventDefault();
+                router.push({
+                  pathname: '/download',
+                });
+              }}
+              href="/download"
+              className={styles.card}
+            >
               <h3>Download &rarr;</h3>
-              <p>
-                Get if for FREE. It&apos; s available for Windows and MacOS.{' '}
-              </p>
+              <p>Get if for FREE. Available for Windows and macOS. </p>
             </a>
 
-            <a href="/blog" className={styles.card}>
+            <a
+              onClick={e => {
+                e.preventDefault();
+                router.push({
+                  pathname: '/blog',
+                });
+              }}
+              href="/blog"
+              className={styles.card}
+            >
               <h3>Blog &rarr;</h3>
               <p>If you are curious about Clips, please read our blog.</p>
             </a>
@@ -387,8 +420,8 @@ export default function Home(): JSX.Element {
                     textAlign: 'center',
                   }}
                 >
-                  Spend less time chasing your documents— Everything you need is
-                  saved inside your clipboard.
+                  Spend less time hunting through your documents— everything you
+                  need is saved inside your clipboard.
                 </Typography>
               </div>
             </div>
@@ -495,7 +528,7 @@ export default function Home(): JSX.Element {
         </div>
       </div>
 
-      <div style={{ width: '100%', marginTop: '250px' }}>
+      <div style={{ width: '100%', marginTop: '125px' }}>
         <Footer />
       </div>
     </div>

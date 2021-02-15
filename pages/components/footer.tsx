@@ -5,8 +5,8 @@ import {
   Typography,
   useTheme,
 } from '@material-ui/core';
+import { useRouter } from 'next/router';
 import React from 'react';
-import Image from 'next/image';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -38,9 +38,10 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export function Footer(props: unknown): JSX.Element {
+export default function Footer(props: unknown): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
+  const router = useRouter();
   return (
     <footer style={{ width: '100%' }}>
       <div className={classes.container}>
@@ -50,8 +51,29 @@ export function Footer(props: unknown): JSX.Element {
               <Typography style={{ fontWeight: 900, padding: '5px 0' }}>
                 Blog
               </Typography>
-              <Link className={classes.gridItems} href="/blog/introduction">
+              <Link
+                className={classes.gridItems}
+                href="/blog/introduction"
+                onClick={e => {
+                  e.preventDefault();
+                  router.push({
+                    pathname: '/blog/introduction',
+                  });
+                }}
+              >
                 Introduction to Clips
+              </Link>
+              <Link
+                className={classes.gridItems}
+                href="/blog/technology"
+                onClick={e => {
+                  e.preventDefault();
+                  router.push({
+                    pathname: '/blog/technology',
+                  });
+                }}
+              >
+                Clips under the hood
               </Link>
             </div>
           </div>
@@ -70,9 +92,16 @@ export function Footer(props: unknown): JSX.Element {
               <Link
                 className={classes.gridItems}
                 target="_blank"
-                href="https://www.electronjs.org/apps/infiniti-clips"
+                href="https://www.electronjs.org/apps"
               >
                 Electron
+              </Link>
+              <Link
+                className={classes.gridItems}
+                target="_blank"
+                href="https://snapcraft.io/infiniti-clips"
+              >
+                Snapcraft
               </Link>
               <Link
                 className={classes.gridItems}
@@ -81,6 +110,13 @@ export function Footer(props: unknown): JSX.Element {
               >
                 Softpedia
               </Link>
+              <Link
+                className={classes.gridItems}
+                target="_blank"
+                href="https://www.majorgeeks.com/files/details/clips.html"
+              >
+                Major Geeks
+              </Link>
             </div>
           </div>
           <div className={classes.gridList}>
@@ -88,13 +124,40 @@ export function Footer(props: unknown): JSX.Element {
               <Typography style={{ fontWeight: 900, padding: '5px 0' }}>
                 Resources
               </Typography>
-              <Link className={classes.gridItems} href="/privacy">
+              <Link
+                className={classes.gridItems}
+                href="/privacy"
+                onClick={e => {
+                  e.preventDefault();
+                  router.push({
+                    pathname: '/privacy',
+                  });
+                }}
+              >
                 Privacy Policy
               </Link>
-              <Link className={classes.gridItems} href="/contact">
+              <Link
+                className={classes.gridItems}
+                href="/contact"
+                onClick={e => {
+                  e.preventDefault();
+                  router.push({
+                    pathname: '/contact',
+                  });
+                }}
+              >
                 Contact
               </Link>
-              <Link className={classes.gridItems} href="/about">
+              <Link
+                className={classes.gridItems}
+                href="/about"
+                onClick={e => {
+                  e.preventDefault();
+                  router.push({
+                    pathname: '/about',
+                  });
+                }}
+              >
                 About
               </Link>
             </div>
@@ -103,7 +166,11 @@ export function Footer(props: unknown): JSX.Element {
 
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{ filter: 'grayscale(1) opacity(0.4)' }}>
-            <Image src="/clips.svg" alt="Clips" width={50} height={50} />
+            <img
+              src="/clips.svg"
+              alt="Clips"
+              style={{ width: 50, height: 50 }}
+            />
           </div>
           <Typography
             variant="body2"
@@ -113,7 +180,7 @@ export function Footer(props: unknown): JSX.Element {
               color: theme.palette.text.secondary,
             }}
           >
-            Copyright © 2021 Infiniti Inc. —{' '}
+            Copyright © 2023 Infiniti Co., Ltd —{' '}
             <span style={{ fontWeight: 700 }}> All rights reserved. </span>
           </Typography>
         </div>
@@ -122,7 +189,7 @@ export function Footer(props: unknown): JSX.Element {
           variant="body2"
           style={{ textAlign: 'center', padding: '15px 0' }}
         >
-          Copyright — <span style={{ fontWeight: 700 }}> 2021 </span>
+          Copyright — <span style={{ fontWeight: 700 }}> 2023 </span>
         </Typography>
       </div>
     </footer>
