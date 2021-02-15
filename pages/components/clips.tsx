@@ -239,7 +239,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export function Clips(): JSX.Element {
+export default function Clips(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   return (
@@ -252,7 +252,7 @@ export function Clips(): JSX.Element {
             <Avatar
               className={clsx(classes.avatar, classes.animationColor)}
               sizes="small"
-              src="/person.jpg"
+              src="/person.png"
             >
               α
             </Avatar>

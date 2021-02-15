@@ -12,8 +12,8 @@ import {
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React, { useState } from 'react';
-import { Header } from './components/header';
-import { Footer } from './components/footer';
+import Header from './components/header';
+import Footer from './components/footer';
 
 const useStyles = makeStyles(theme => ({
   container: {

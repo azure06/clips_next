@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import { Skeleton } from '@material-ui/lab';
 import { Avatar, Button, CardActions, CardHeader } from '@material-ui/core';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,8 +22,9 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export function CaseStudy(props: unknown): JSX.Element {
+export default function CaseStudy(props: unknown): JSX.Element {
   const classes = useStyles();
+  const router = useRouter();
 
   return (
     <Card className={classes.card} elevation={24}>
@@ -39,8 +41,8 @@ export function CaseStudy(props: unknown): JSX.Element {
           variant="body1"
           style={{ padding: '16px', fontWeight: 500 }}
         >
-          Flavia Agapetos used to spend hours chasing documents with the list of
-          addresses she was looking for.
+          Flavia Agapetos used to spend hours every day searching through her
+          documents for lists of addresses.
         </Typography>
         <Typography variant="h6" style={{ padding: '16px', fontWeight: 700 }}>
           SOLUTION
@@ -49,8 +51,9 @@ export function CaseStudy(props: unknown): JSX.Element {
           variant="body1"
           style={{ padding: '8px 16px', fontWeight: 500 }}
         >
-          Flavia installed Clips to save the clipboard history. Now she collects
-          the list of addresses instantly.
+          Flavia installed Clips to begin saving her clients’ addresses directly
+          into her clipboard history. Her hours of searching are now a thing of
+          the past.
         </Typography>
         <Typography variant="h6" style={{ padding: '16px', fontWeight: 700 }}>
           IMPACT
@@ -59,7 +62,7 @@ export function CaseStudy(props: unknown): JSX.Element {
           variant="body1"
           style={{ padding: '8px 16px', fontWeight: 500 }}
         >
-          By using Clips Flavia was able to finish her work 8 times faster than
+          By using Clips Flavia was able to finish her work eight times faster than
           usual.
         </Typography>
       </CardContent>
@@ -70,7 +73,11 @@ export function CaseStudy(props: unknown): JSX.Element {
           color="primary"
           variant="contained"
           disableElevation
-          href="/download"
+          onClick={e =>
+            router.push({
+              pathname: '/download',
+            })
+          }
           style={{ boxShadow: '0 3px 8px 1px rgba(0,91,255, .3)' }}
         >
           <Typography

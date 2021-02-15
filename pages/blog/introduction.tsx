@@ -3,8 +3,9 @@ import styles from '../../styles/Home.module.css';
 import { Button, Divider, makeStyles, Typography } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React from 'react';
-import { Header } from '../components/header';
-import { Footer } from '../components/footer';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles(theme => ({
   flexColumn: {
@@ -16,14 +17,16 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 700,
   },
   p: {
+    fontFamily: 'charter, Georgia, Cambria, "Times New Roman", Times, serif',
     fontWeight: 400,
-    fontSize: '1rem',
+    fontSize: '1.2rem',
   },
 }));
 
 export default function Introduction(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
+  const router = useRouter();
 
   return (
     <div className={styles.container}>
@@ -32,93 +35,96 @@ export default function Introduction(): JSX.Element {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className={styles.mainWithMargin} style={{ maxWidth: 850 }}>
+      <main className={styles.mainWithMargin} style={{ maxWidth: 680 }}>
         <div className={classes.flexColumn}>
-          <Typography variant="h3" className={classes.blog}>
+          <Typography
+            variant="h3"
+            className={classes.blog}
+            style={{ textAlign: 'center' }}
+          >
             Everything you need to know about Clips
           </Typography>
           <Typography
-            variant="body1"
-            style={{ color: theme.palette.text.secondary, textAlign: 'center' }}
+            variant="body2"
+            style={{
+              margin: '35px 0',
+              color: theme.palette.text.secondary,
+              textAlign: 'center',
+            }}
           >
             Monday, February 15th 2021
           </Typography>
-          <Divider style={{ width: '100%', margin: '50px 0' }} />
+          <Divider style={{ width: '100%', margin: '30px 0' }} />
 
           <p className={classes.p}>
             When using our devices, we all have to copy some text, pictures, or
             files now and then. However, our operating systems do not have a
             clipboard with storage. That means, once we copy another thing, the
-            previous copy is gone forever, and it can be a problem if we cannot
-            find it again. The clipboard Manager application &quot;CLIPS&quot;
-            is here to help you out in this type of situation.
+            previous copy is gone forever, and it could be a problem if we
+            cannot find it again. Clips will help you out in this type of
+            situation.
           </p>
           <Typography
             variant="h4"
             className={classes.blog}
             style={{ margin: '25px 0 0 0' }}
           >
-            Features of this Clipboard Manager Application:
-          </Typography>
-          <Typography variant="h5" style={{ margin: '10px 0 0 0' }}>
-            Here are some technical features of Clips clipboard with storage:
+            Features
           </Typography>
 
           <div style={{ margin: '25px 0 0 0' }}>
             <Typography variant="h5" className={classes.blog}>
-              Retrieve all that you copied from History
+              Retrieve all that you copied from the clipboard history
             </Typography>
             <p className={classes.p}>
-              All of that you have copied to your windows 10 clipboard, will
-              also get copied and saved permanently in Clips. Regardless of how
-              much time passes, you can always open the Clips software to
-              retrieve it again. You can also have your favorite copies starred
-              for quick retrieval. So, all in all, it can be great for your
-              windows 10 clipboard.
+              Everything of that you have copied to your windows 10 clipboard,
+              will also get copied and saved permanently in Clips. Regardless of
+              how much time passes, you can always open Clipt to retrieve it
+              again. You can also have label you favorite items for a quick
+              retrieval.
             </p>
           </div>
 
           <div style={{ margin: '25px 0 0 0' }}>
             <Typography variant="h5" className={classes.blog}>
-              Light and Dark Themes Available
+              Light and Dark Themes
             </Typography>
             <p className={classes.p}>
               This application is available in both light and dark themes, for
-              both Mac OS and Windows. You can change the themes depending on
+              Windows, macOS, and Linux. You can change the themes depending on
               your choice at any time you like.
             </p>
           </div>
 
           <div style={{ margin: '25px 0 0 0' }}>
             <Typography variant="h5" className={classes.blog}>
-              Search Engine to search Between Formats
+              Search Between Formats
             </Typography>
             <p className={classes.p}>
-              This application comes with a powerful search engine that can be
-              used to get to your previous saves fast with keywords. Also note
-              that you can save things beyond texts, e.g., files and pictures.
-              The search engine allows you to go to all texts, all pictures, or
-              files subsequently.
+              This application comes with a powerful search engine that allows
+              you to get to your previous saves instantly. You can search
+              through texts, images, RTF, HTML subsequently.
             </p>
           </div>
 
           <div style={{ margin: '25px 0 0 0' }}>
             <Typography variant="h5" className={classes.blog}>
-              Instant Clean-up whenever you want to
+              Instant Clean-up
             </Typography>
             <p className={classes.p}>
-              If you feel like you do not have your previous copied stuff
+              If you feel like you do not need your previous copied stuff
               anymore, you can remove them instantly with just a single click.
-              Or, you can remove selected items too. It helps manage your Clips
-              better and is suitable for privacy.
+              Or if you prefer, you can remove each item by selecting them one
+              by one. It helps you to manage your Clips better and is suitable
+              for privacy.
             </p>
           </div>
 
           <div style={{ margin: '25px 0 0 0' }}>
             <Typography variant="h5" className={classes.blog}>
-              Benefits You need to know about it:
+              Benefits
             </Typography>
-            <ul>
+            <ul className={classes.p}>
               <li>
                 You will not have to waste time searching for the webpage or
                 directory again where you have copied a text or file from.
@@ -137,7 +143,7 @@ export default function Introduction(): JSX.Element {
 
           <div style={{ margin: '25px 0 0 0' }}>
             <Typography variant="h5" className={classes.blog}>
-              Real-Life Example of How it&apos;s Used:
+              Real-World scenarios
             </Typography>
             <p className={classes.p}>
               Let&apos;s say you have to complete an essay given to you as an
@@ -154,12 +160,13 @@ export default function Introduction(): JSX.Element {
 
           <div style={{ margin: '25px 0 0 0' }}>
             <Typography variant="h5" className={classes.blog}>
-              Final Thoughts:
+              Final Thoughts
             </Typography>
             <p className={classes.p}>
-              Mac OS and Windows clipboard will make our life easier, because of
-              the various features and facilities it provides us with. Now, you
-              want to have to worry about losing your saved items ever again.
+              Available for Windows, macOS, and Linux, Clips will make our life
+              easier, thanks to the various features it facilitates our daily
+              work. Now, you won&apos;t have to worry about losing your saved
+              items ever again.
             </p>
           </div>
 
@@ -168,7 +175,11 @@ export default function Introduction(): JSX.Element {
           <Button
             variant="contained"
             color="primary"
-            href="/blog"
+            onClick={e =>
+              router.push({
+                pathname: '/blog',
+              })
+            }
             style={{
               width: 250,
               padding: '10px 25px',

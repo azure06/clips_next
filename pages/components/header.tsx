@@ -10,7 +10,6 @@ import {
   useTheme,
 } from '@material-ui/core';
 import React from 'react';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
@@ -63,6 +62,13 @@ const useStyles = makeStyles(theme => ({
     height: '64px',
     padding: '0 15px',
     borderRadius: 0,
+    minWidth: '90px',
+    '&.hideXS': {
+      [theme.breakpoints.down('xs')]: {
+        visibility: 'hidden',
+        width: 0,
+      },
+    },
   },
   hideSmDown: {
     [theme.breakpoints.down('sm')]: { visibility: 'hidden' },
@@ -82,7 +88,7 @@ function ElevationScroll(props: Props) {
   });
 }
 
-export function Header(props: Props): JSX.Element {
+export default function Header(props: Props): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   const router = useRouter();
@@ -101,9 +107,20 @@ export function Header(props: Props): JSX.Element {
           }
         >
           <Toolbar>
-            <ButtonBase style={{ color: theme.palette.common.white }} href="/">
+            <ButtonBase
+              style={{ color: theme.palette.common.white }}
+              onClick={e =>
+                router.push({
+                  pathname: '/',
+                })
+              }
+            >
               <div className={classes.logo}>
-                <Image src="/logo.svg" alt="Clips" width="100" height="32" />
+                <img
+                  src="/logo.svg"
+                  alt="Clips Logo"
+                  style={{ width: 100, height: 32 }}
+                />
               </div>
             </ButtonBase>
 
@@ -112,7 +129,11 @@ export function Header(props: Props): JSX.Element {
                 color={router.pathname === '/features' ? 'primary' : 'inherit'}
                 disableElevation
                 className={classes.toolbarBtn}
-                href="/features"
+                onClick={e =>
+                  router.push({
+                    pathname: '/features',
+                  })
+                }
               >
                 Features
               </Button>
@@ -120,23 +141,35 @@ export function Header(props: Props): JSX.Element {
                 color={router.pathname === '/premium' ? 'primary' : 'inherit'}
                 disableElevation
                 className={classes.toolbarBtn}
-                href="/premium"
+                onClick={e =>
+                  router.push({
+                    pathname: '/premium',
+                  })
+                }
               >
                 Premium
               </Button>
               <Button
                 color={router.pathname === '/blog' ? 'primary' : 'inherit'}
                 disableElevation
-                className={classes.toolbarBtn}
-                href="/blog"
+                className={clsx(classes.toolbarBtn, 'hideXS')}
+                onClick={e =>
+                  router.push({
+                    pathname: '/blog',
+                  })
+                }
               >
                 Blog
               </Button>
               <Button
                 color={router.pathname === '/about' ? 'primary' : 'inherit'}
                 disableElevation
-                className={classes.toolbarBtn}
-                href="/about"
+                className={clsx(classes.toolbarBtn, 'hideXS')}
+                onClick={e =>
+                  router.push({
+                    pathname: '/about',
+                  })
+                }
               >
                 About
               </Button>
@@ -146,7 +179,7 @@ export function Header(props: Props): JSX.Element {
               <Button
                 color="inherit"
                 disableElevation
-                className={classes.toolbarBtn}
+                className={clsx(classes.toolbarBtn, 'hideXS')}
                 target="_blank"
                 href="https://github.com/azure06/clips"
               >

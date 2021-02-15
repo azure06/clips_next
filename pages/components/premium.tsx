@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { Skeleton } from '@material-ui/lab';
 import { Button, CardActions } from '@material-ui/core';
 import { paletteLight } from '../../src/theme';
+import { useRouter } from 'next/router';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 function Media(props: unknown) {
   const classes = useStyles();
+  const router = useRouter();
 
   return (
     <Card className={classes.card} elevation={24}>
@@ -46,7 +48,11 @@ function Media(props: unknown) {
           color="primary"
           variant="contained"
           disableElevation
-          href="/premium"
+          onClick={e =>
+            router.push({
+              pathname: '/premium',
+            })
+          }
           style={{ boxShadow: '0 3px 8px 1px rgba(0,91,255, .3)' }}
         >
           <Typography
@@ -65,6 +71,6 @@ function Media(props: unknown) {
   );
 }
 
-export function Premium(): JSX.Element {
+export default function Premium(): JSX.Element {
   return <Media />;
 }

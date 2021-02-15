@@ -2,6 +2,7 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import {
   Button,
+  Divider,
   fade,
   FormControl,
   InputAdornment,
@@ -13,8 +14,8 @@ import {
 } from '@material-ui/core';
 import { useTheme } from '@material-ui/core/styles';
 import React, { useEffect, useState } from 'react';
-import { Header } from './components/header';
-import { Footer } from './components/footer';
+import Header from './components/header';
+import Footer from './components/footer';
 import { Email } from '@material-ui/icons';
 import clsx from 'clsx';
 
@@ -72,6 +73,7 @@ const useStyles = makeStyles(theme => ({
   },
   image: {
     maxWidth: '740px',
+    objectFit: 'contain',
     [theme.breakpoints.down('md')]: {
       padding: '25px 0',
       maxWidth: '85vw',
@@ -101,6 +103,8 @@ export default function Home(): JSX.Element {
   const classes = useStyles();
   const theme = useTheme();
   const [isMac, setIsMac] = useState(false);
+  const [emailState, setEmailState] = useState(null);
+  const [isSubmitted, setSubmission] = useState(false);
   useEffect(() => {
     const _isMac = whenBrowser(
       win => /(Mac|iPhone|iPod|iPad)/i.test(win.navigator.platform),
@@ -108,6 +112,31 @@ export default function Home(): JSX.Element {
     );
     setIsMac(_isMac);
   }, []);
+
+  const encode = (data: { [key: string]: any }) =>
+    Object.keys(data)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join('&');
+
+  const subscribe = async (e: any) => {
+    if (emailState) {
+      if (/.+@.+\..+/.test(emailState))
+        await fetch('', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          body: encode({
+            'form-name': 'contact-form',
+            name: 'Subscribe',
+            email: emailState,
+            message: '',
+          }),
+        });
+      setSubmission(true);
+      setEmailState(null);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -126,7 +155,7 @@ export default function Home(): JSX.Element {
             padding: '0 24px',
           }}
         >
-          <Typography className={classes.title}>Open your app with</Typography>
+          <Typography className={classes.title}>Start Clips with</Typography>
           <Typography className={classes.title}>
             {isMac ? '⌘' : 'Ctrl'} + {isMac ? 'shift' : 'alt'} + V
           </Typography>
@@ -143,11 +172,18 @@ export default function Home(): JSX.Element {
           <div className={classes.pair}>
             <div className={classes.text}>
               <Typography variant="h3" style={{ fontWeight: 700 }}>
-                Copy text and images from your clipboard
+                Copy everything you need
               </Typography>
               <Typography style={{ fontWeight: 500, padding: '16px 0' }}>
-                Just click on the item you want to copy. That&apos;s it! Now you
-                can paste it everywhere!
+                Clips will store everything you copy. Copying text, images and
+                more couldn&apos;t be easier!
+              </Typography>
+              <Typography variant="h5" style={{ fontWeight: 700 }}>
+                Paste!
+              </Typography>
+              <Typography style={{ fontWeight: 500, padding: '16px 0' }}>
+                Click on the item you need. That&apos;s it! Now you can paste
+                your item wherever you want.
               </Typography>
             </div>
             <img
@@ -176,10 +212,16 @@ export default function Home(): JSX.Element {
               <Typography variant="h3" style={{ fontWeight: 700 }}>
                 Create labels to organize your clipboard
               </Typography>
-              <Typography style={{ fontWeight: 500, padding: '16px 0' }}>
-                Just click on the item you want to copy. That&apos;s it! Now you
-                can paste it everywhere!
-              </Typography>
+              <div
+                style={{ fontWeight: 500, padding: '16px 0', fontSize: '1rem' }}
+              >
+                Easily and effectively organize your clipboard:
+                <ul>
+                  <li>Create your custom label</li>
+                  <li>Add the label you created to your items</li>
+                  <li>Filter your items by label</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -189,12 +231,28 @@ export default function Home(): JSX.Element {
           <div className={classes.pair}>
             <div className={classes.text}>
               <Typography variant="h3" style={{ fontWeight: 700 }}>
-                Keep in Sync with Google Drive
+                Sync Clips with Google Drive
               </Typography>
-              <Typography style={{ fontWeight: 500, padding: '16px 0' }}>
-                By signing-in to Google Drive you can keep in sync all your
-                devices.
-              </Typography>
+              <div
+                style={{ fontWeight: 500, padding: '16px 0', fontSize: '1rem' }}
+              >
+                By signing in to Google Drive you can sync all your devices.
+                <ul>
+                  <li>Periodic Backup of your data</li>
+                  <li>Restore data at any moment</li>
+                  <li>Automatic synchronization among your devices*</li>
+                </ul>
+                <p
+                  style={{
+                    marginTop: 50,
+                    fontSize: '0.85rem',
+                    fontWeight: 300,
+                    color: theme.palette.text.secondary,
+                  }}
+                >
+                  *Features are available only in Clips Premium
+                </p>
+              </div>
             </div>
             <img
               src="/drive.png"
@@ -208,6 +266,50 @@ export default function Home(): JSX.Element {
         </div>
 
         {/* Content 4 */}
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '20px 16px',
+            margin: '64px 0',
+          }}
+        >
+          <Typography variant="h3" style={{ fontWeight: 700 }}>
+            A powerful image editor
+          </Typography>
+          <div
+            style={{
+              fontWeight: 500,
+              padding: '16px 0',
+              marginTop: 10,
+              fontSize: '1rem',
+              maxWidth: 700,
+            }}
+          >
+            Clips also comes with an image editor for cropping, resizing, adding
+            annotations, and more. After copying a picture, all you need is to
+            click on the pencil icon to open the editor! *
+            <p
+              style={{
+                marginTop: 50,
+                fontSize: '0.85rem',
+                fontWeight: 300,
+                color: theme.palette.text.secondary,
+              }}
+            >
+              *Full features are available only in Clips Premium
+            </p>
+          </div>
+          <img
+            src="/image-editor.png"
+            alt="Image Editor"
+            className={classes.image}
+          />
+        </div>
+
+        {/* Content 5 */}
         <div
           style={{
             display: 'flex',
@@ -240,39 +342,46 @@ export default function Home(): JSX.Element {
               className={clsx(classes.flexColumn, 'center')}
               style={{ padding: 16 }}
             >
-              <FormControl variant="outlined">
-                <InputLabel htmlFor="outlined-adornment-amount">
-                  you@domain.com
-                </InputLabel>
-                <OutlinedInput
-                  style={{
-                    width: '240px',
-                  }}
-                  id="outlined-adornment-amount"
-                  // label="you@domain.com"
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <Email />
-                    </InputAdornment>
-                  }
-                  margin="dense"
-                  labelWidth={130}
-                />
-                <Button
-                  style={{
-                    width: 240,
-                    fontWeight: 700,
-                    padding: '10px 25px',
-                    margin: '10px 0',
-                    boxShadow: '0 3px 8px 1px rgba(0,91,255, .3)',
-                  }}
-                  color="primary"
-                  variant="contained"
-                  disableElevation
-                >
-                  Subscribe
-                </Button>
-              </FormControl>
+              {!isSubmitted ? (
+                <FormControl variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-amount">
+                    you@domain.com
+                  </InputLabel>
+                  <OutlinedInput
+                    style={{
+                      width: '240px',
+                    }}
+                    id="outlined-adornment-amount"
+                    // label="you@domain.com"
+                    startAdornment={
+                      <InputAdornment position="start">
+                        <Email />
+                      </InputAdornment>
+                    }
+                    margin="dense"
+                    labelWidth={130}
+                    onChange={e => setEmailState(e.target.value)}
+                    error={emailState !== null && emailState === ''}
+                  />
+                  <Button
+                    style={{
+                      width: 240,
+                      fontWeight: 700,
+                      padding: '10px 25px',
+                      margin: '10px 0',
+                      boxShadow: '0 3px 8px 1px rgba(0,91,255, .3)',
+                    }}
+                    onClick={subscribe}
+                    color="primary"
+                    variant="contained"
+                    disableElevation
+                  >
+                    Subscribe
+                  </Button>
+                </FormControl>
+              ) : (
+                <Typography variant="h6">Thanks for subscribing!</Typography>
+              )}
             </div>
           </div>
         </div>
