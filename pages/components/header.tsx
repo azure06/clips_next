@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import {
   AppBar,
   Button,
@@ -189,31 +190,57 @@ export default function Header(props: Props): JSX.Element {
           </Toolbar>
         </AppBar>
       </ElevationScroll>
-      <Typography
-        variant="subtitle2"
+      <div
         style={{
           position: 'absolute',
           top: 64,
-          height: 48,
           width: '100%',
           display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          backgroundColor: theme.palette.secondary.main,
-          color: fade(theme.palette.common.white, 0.75),
-          zIndex: 2,
+          flexDirection: 'column',
         }}
       >
-        <span
+        <a
+          target="_blank"
+          href="https://xkey.infiniticlips.com"
           style={{
-            fontWeight: 700,
-            color: fade(theme.palette.common.white, 0.9),
+            width: '100%',
+            textAlign: 'center',
+            backgroundColor: 'rgba(245,30,100,1)',
+            // backgroundColor: theme.palette.secondary.main,
+            color: fade(theme.palette.common.white, 0.75),
+            zIndex: 2,
+            cursor: 'pointer',
+            textDecoration: 'underline',
+            padding: '12px 0',
+            fontWeight: 'bold',
           }}
         >
-          {'Black Lives Matter. '}
-        </span>{' '}
-        &nbsp; Support the Equal Justice Initiative.
-      </Typography>
+          <span
+            style={{
+              fontWeight: 700,
+              color: fade(theme.palette.common.white, 0.9),
+            }}
+          >
+            {'🚀 Introducing XKey:'}
+          </span>{' '}
+          <span>&nbsp; The Smarter Way to Create Presentations!</span>
+        </a>
+        <Typography
+          variant="subtitle2"
+          style={{
+            marginTop: '-12px',
+            padding: '0 0 12px 0',
+            textAlign: 'center',
+            // backgroundColor: 'rgba(50,110,120,1)',
+            backgroundColor: 'rgba(245,30,100,1)',
+            // backgroundColor: theme.palette.secondary.main,
+            color: fade(theme.palette.common.white, 0.75),
+            zIndex: 2,
+          }}
+        >
+          Use code EARLY50 for 50% off—offer valid until 2024/11/30!
+        </Typography>
+      </div>
     </React.Fragment>
   );
 }

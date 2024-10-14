@@ -30,8 +30,6 @@ const NEXT_PUBLIC_CHECKOUT_SESSION_URL =
     ? process.env.NEXT_PUBLIC_CHECKOUT_SESSION_URL_TEST
     : process.env.NEXT_PUBLIC_CHECKOUT_SESSION_URL;
 
-console.log(NEXT_PUBLIC_CHECKOUT_SESSION_URL);
-
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -337,6 +335,7 @@ export default function Home(): JSX.Element {
                       return response.json();
                     })
                     .then(async function (session) {
+                      console.info(session);
                       const stripe = await loadStripe(
                         NEXT_PUBLIC_STRIPE_PUBLIC_KEY
                       );

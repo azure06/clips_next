@@ -64,6 +64,14 @@ export default function About(): JSX.Element {
   const router = useRouter();
   const articles = [
     {
+      title: ' XKey Has Arrived',
+      subtitle: 'Unlock the Hidden Power in Your PowerPoint',
+      picture: '/passion.png',
+      pathname: '/blog/xkey',
+      dark: false,
+      date: 'Monday, October 13th 2024',
+    },
+    {
       title: ' Clipboard Apps',
       subtitle: 'Why use a clipboard app?',
       picture: '/clipboards.png',
